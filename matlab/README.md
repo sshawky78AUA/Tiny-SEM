@@ -52,6 +52,7 @@ o = tinysem_run(P, 0, 'tinysem', 'feedback', false); % ablation: no congestion f
 | `run_all_experiments.m` | Every experiment (E1–E3, Table I, sensitivity, drift, game) → `tinysem_results.mat` |
 | `make_figures.m` | Fig. 2 (`fig_eval.pdf`), Fig. 3 (`fig_drift.pdf`), Table I, paired gains, LDP, recovery times |
 | `tinysem_smoke_test.m` | Consistency check against the paper's values |
+| `tinysem_sweep.m` | Varies one parameter across methods and seeds and prints a table |
 
 ## Model conventions (match the paper)
 
@@ -68,16 +69,11 @@ o = tinysem_run(P, 0, 'tinysem', 'feedback', false); % ablation: no congestion f
 - **Seeds.** For a given seed, all methods share the same topology and demand.
   Dynamics use a separate stream (seed + 10000).
 
-## Relation to the Python reference implementation
+## Testing
 
-The paper's numbers were produced with the Python version of this simulator, which
-the MATLAB code mirrors function by function.
-
-MATLAB's random streams differ from NumPy's, so individual runs differ. Averages
-agree within the reported confidence intervals. `tinysem_smoke_test` checks this,
-with tolerances of several CI widths.
-
-This MATLAB port was written and statically checked (MISS_HIT parser and linter:
-no issues) but **not executed** by its author, because no MATLAB/Octave license
-was available. Please run `tinysem_smoke_test` first. If any check fails, the
-printed table shows which quantity deviates.
+The paper's numbers were produced with a Python implementation of this simulator, which
+this MATLAB code mirrors function by function. MATLAB's random streams differ from NumPy's,
+so individual runs differ, but averages agree within the reported confidence intervals.
+`tinysem_smoke_test` checks this against the paper's values, with tolerances of several
+confidence-interval widths. It passes in GNU Octave 8.4 (with `../octave_compat` on the
+path), where `run_all_experiments(true)` also runs to completion.

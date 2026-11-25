@@ -107,7 +107,7 @@ R.jobs = jobs;
 R.res  = res;
 R.quick = quick;
 R.game = run_game(S_GAME, quick);
-save('tinysem_results.mat', 'R', '-v7.3');
+save('tinysem_results.mat', 'R', '-v7');
 fprintf('Saved tinysem_results.mat\n');
 end
 
